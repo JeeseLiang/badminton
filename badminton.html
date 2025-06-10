@@ -36,10 +36,10 @@
                 @apply flex-1 p-4 shadow-lg transition-all duration-500 transform hover:scale-[1.02] active:scale-[0.98];
             }
             .btn-primary {
-                @apply bg-accent hover:bg-amber-500 text-white font-bold py-3 px-6 shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-accent/50;
+                @apply bg-accent hover:bg-amber-500 text-white font-bold py-3 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-accent/50;
             }
             .btn-secondary {
-                @apply bg-white hover:bg-gray-100 text-neutral font-bold py-2 px-4 shadow transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-neutral/30;
+                @apply bg-white hover:bg-gray-100 text-neutral font-bold py-2 rounded-none shadow transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-neutral/30;
             }
             .animate-swap {
                 animation: swap-colors 0.5s ease-in-out;
@@ -63,10 +63,10 @@
                 @apply p-4 md:p-6 lg:p-8;
             }
             .landscape-mode .btn-primary {
-                @apply py-3 px-6 md:py-4 md:px-8 text-base md:text-lg;
+                @apply py-3 md:py-4 text-base md:text-lg;
             }
             .landscape-mode .btn-secondary {
-                @apply py-2 px-4 md:py-3 md:px-6 text-base md:text-lg;
+                @apply py-2 md:py-3 text-base md:text-lg;
             }
             .landscape-mode #scoreRecords {
                 @apply mt-4 md:mt-6;
@@ -76,7 +76,7 @@
 </head>
 
 <body class="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen font-sans text-neutral">
-    <div class="container mx-auto px-0 max-w-md">
+    <div class="w-full">
         <!-- 主要计分区域 -->
         <div id="scoreContainer" class="flex flex-col">
             <!-- 队伍信息和比分 -->
@@ -102,21 +102,21 @@
                 <div class="grid grid-cols-2">
                     <div class="grid grid-cols-2">
                         <button id="addLeftPoint"
-                            class="bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            class="bg-teamRed hover:bg-red-600 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
                             <i class="fa fa-plus"></i>
                         </button>
                         <button id="subLeftPoint"
-                            class="bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            class="bg-red-700 hover:bg-red-800 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
                     <div class="grid grid-cols-2">
                         <button id="addRightPoint"
-                            class="bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            class="bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
                             <i class="fa fa-plus"></i>
                         </button>
                         <button id="subRightPoint"
-                            class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
@@ -249,27 +249,27 @@
         function updateButtonColors() {
             if (!isSwapped) {
                 // 左侧按钮（红队）
-                addLeftPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addLeftPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 addLeftPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
-                subLeftPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subLeftPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 subLeftPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
                 
                 // 右侧按钮（蓝队）
-                addRightPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addRightPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 addRightPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
-                subRightPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subRightPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 subRightPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
             } else {
                 // 左侧按钮（蓝队）
-                addLeftPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addLeftPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 addLeftPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
-                subLeftPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subLeftPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 subLeftPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
                 
                 // 右侧按钮（红队）
-                addRightPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addRightPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 addRightPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
-                subRightPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subRightPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
                 subRightPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
             }
         }
