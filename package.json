@@ -1,0 +1,15 @@
+{
+  "name": "badminton",
+  "version": "1.0.0",
+  "description": "一个简单易用的羽毛球比赛计分工具。",
+  "main": "convert-icons.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.34.2"
+  }
+}
