@@ -33,13 +33,13 @@
                 @apply text-8xl md:text-9xl font-bold tracking-tight transition-all duration-300;
             }
             .team-card {
-                @apply flex-1 rounded-xl p-6 shadow-lg transition-all duration-500 transform hover:scale-[1.02] active:scale-[0.98];
+                @apply flex-1 p-4 shadow-lg transition-all duration-500 transform hover:scale-[1.02] active:scale-[0.98];
             }
             .btn-primary {
-                @apply bg-accent hover:bg-amber-500 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-accent/50;
+                @apply bg-accent hover:bg-amber-500 text-white font-bold py-3 px-6 shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-accent/50;
             }
             .btn-secondary {
-                @apply bg-white hover:bg-gray-100 text-neutral font-bold py-2 px-4 rounded-full shadow transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-neutral/30;
+                @apply bg-white hover:bg-gray-100 text-neutral font-bold py-2 px-4 shadow transition-all duration-300 transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-neutral/30;
             }
             .animate-swap {
                 animation: swap-colors 0.5s ease-in-out;
@@ -49,81 +49,94 @@
                 50% { opacity: 0.5; }
                 100% { opacity: 1; }
             }
+            /* 横屏模式样式 */
+            .landscape-mode {
+                @apply w-full;
+            }
+            .landscape-mode .team-cards {
+                @apply flex;
+            }
+            .landscape-mode .score-display {
+                @apply text-8xl md:text-9xl lg:text-[10rem];
+            }
+            .landscape-mode .team-card {
+                @apply p-4 md:p-6 lg:p-8;
+            }
+            .landscape-mode .btn-primary {
+                @apply py-3 px-6 md:py-4 md:px-8 text-base md:text-lg;
+            }
+            .landscape-mode .btn-secondary {
+                @apply py-2 px-4 md:py-3 md:px-6 text-base md:text-lg;
+            }
+            .landscape-mode #scoreRecords {
+                @apply mt-4 md:mt-6;
+            }
         }
     </style>
 </head>
 
 <body class="bg-gradient-to-b from-gray-100 to-gray-200 min-h-screen font-sans text-neutral">
-    <div class="container mx-auto px-4 py-6 max-w-md">
-        <!-- 标题区域 -->
-        <div class="text-center mb-8">
-            <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-neutral mb-2">羽毛球计分板</h1>
-            <p class="text-gray-600">点击加分按钮为队伍计分</p>
-        </div>
-
+    <div class="container mx-auto px-0 max-w-md">
         <!-- 主要计分区域 -->
-        <div class="flex flex-col space-y-6">
+        <div id="scoreContainer" class="flex flex-col">
             <!-- 队伍信息和比分 -->
-            <div class="flex space-x-4">
+            <div class="team-cards flex">
                 <div id="leftTeamCard" class="team-card bg-teamRed text-white">
-                    <div class="flex justify-between items-center mb-4">
+                    <div class="flex justify-between items-center mb-2">
                         <h2 class="text-xl font-bold">红队</h2>
-                        <button id="swapTeams" class="btn-secondary text-white">
-                            <i class="fa fa-exchange"></i>
-                        </button>
                     </div>
                     <div id="leftTeamScore" class="score-display text-center">0</div>
                 </div>
 
                 <div id="rightTeamCard" class="team-card bg-teamBlue text-white">
-                    <div class="flex justify-between items-center mb-4">
+                    <div class="flex justify-between items-center mb-2">
                         <h2 class="text-xl font-bold">蓝队</h2>
-                        <button id="swapTeamsRight" class="btn-secondary text-white">
-                            <i class="fa fa-exchange"></i>
-                        </button>
                     </div>
                     <div id="rightTeamScore" class="score-display text-center">0</div>
                 </div>
             </div>
 
-            <!-- 加分和减分按钮 -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="flex flex-col space-y-2">
-                    <button id="addLeftPoint"
-                        class="bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
-                        <i class="fa fa-plus mr-2"></i> 红队得分
-                    </button>
-                    <button id="subLeftPoint"
-                        class="bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
-                        <i class="fa fa-minus mr-2"></i> 红队取消得分
-                    </button>
+            <!-- 控制区域 -->
+            <div class="control-section">
+                <!-- 加分和减分按钮 -->
+                <div class="grid grid-cols-2">
+                    <div class="grid grid-cols-2">
+                        <button id="addLeftPoint"
+                            class="bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button id="subLeftPoint"
+                            class="bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2">
+                        <button id="addRightPoint"
+                            class="bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button id="subRightPoint"
+                            class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex flex-col space-y-2">
-                    <button id="addRightPoint"
-                        class="bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
-                        <i class="fa fa-plus mr-2"></i> 蓝队得分
-                    </button>
-                    <button id="subRightPoint"
-                        class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center">
-                        <i class="fa fa-minus mr-2"></i> 蓝队取消得分
-                    </button>
-                </div>
-            </div>
 
-            <!-- 功能按钮 -->
-            <div class="grid grid-cols-2 gap-3 mt-4">
-                <button id="recordScore" class="btn-primary flex-1">
-                    <i class="fa fa-bookmark mr-1"></i> 记录比分
-                </button>
-                <button id="resetScore" class="btn-primary flex-1">
-                    <i class="fa fa-refresh mr-1"></i> 重置比分
-                </button>
+                <!-- 功能按钮 -->
+                <div class="grid grid-cols-2">
+                    <button id="recordScore" class="btn-primary rounded-none">
+                        <i class="fa fa-bookmark mr-1"></i> 记录比分
+                    </button>
+                    <button id="resetScore" class="btn-primary rounded-none">
+                        <i class="fa fa-refresh mr-1"></i> 重置比分
+                    </button>
+                </div>
             </div>
 
             <!-- 得分记录区域 -->
-            <div id="scoreRecords" class="mt-8 p-4 bg-white rounded-xl shadow-md">
-                <h3 class="text-lg font-semibold mb-4">得分记录</h3>
-                <div id="recordsList" class="space-y-3">
+            <div id="scoreRecords" class="score-records p-4 bg-white">
+                <h3 class="text-lg font-semibold mb-2">得分记录</h3>
+                <div id="recordsList" class="space-y-2">
                     <!-- 记录将在这里动态添加 -->
                 </div>
             </div>
@@ -153,8 +166,6 @@
         const addRightPointBtn = document.getElementById('addRightPoint');
         const subLeftPointBtn = document.getElementById('subLeftPoint');
         const subRightPointBtn = document.getElementById('subRightPoint');
-        const swapTeamsBtn = document.getElementById('swapTeams');
-        const swapTeamsRightBtn = document.getElementById('swapTeamsRight');
         const resetScoreBtn = document.getElementById('resetScore');
         const recordScoreBtn = document.getElementById('recordScore');
         const recordsList = document.getElementById('recordsList');
@@ -238,28 +249,28 @@
         function updateButtonColors() {
             if (!isSwapped) {
                 // 左侧按钮（红队）
-                addLeftPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                addLeftPointBtn.innerHTML = '<i class="fa fa-plus mr-2"></i> 红队得分';
-                subLeftPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                subLeftPointBtn.innerHTML = '<i class="fa fa-minus mr-2"></i> 红队取消得分';
+                addLeftPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addLeftPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
+                subLeftPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subLeftPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
                 
                 // 右侧按钮（蓝队）
-                addRightPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                addRightPointBtn.innerHTML = '<i class="fa fa-plus mr-2"></i> 蓝队得分';
-                subRightPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                subRightPointBtn.innerHTML = '<i class="fa fa-minus mr-2"></i> 蓝队取消得分';
+                addRightPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addRightPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
+                subRightPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subRightPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
             } else {
                 // 左侧按钮（蓝队）
-                addLeftPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                addLeftPointBtn.innerHTML = '<i class="fa fa-plus mr-2"></i> 蓝队得分';
-                subLeftPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                subLeftPointBtn.innerHTML = '<i class="fa fa-minus mr-2"></i> 蓝队取消得分';
+                addLeftPointBtn.className = 'bg-teamBlue hover:bg-blue-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addLeftPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
+                subLeftPointBtn.className = 'bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subLeftPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
                 
                 // 右侧按钮（红队）
-                addRightPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                addRightPointBtn.innerHTML = '<i class="fa fa-plus mr-2"></i> 红队得分';
-                subRightPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
-                subRightPointBtn.innerHTML = '<i class="fa fa-minus mr-2"></i> 红队取消得分';
+                addRightPointBtn.className = 'bg-teamRed hover:bg-red-600 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                addRightPointBtn.innerHTML = '<i class="fa fa-plus"></i>';
+                subRightPointBtn.className = 'bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-2 rounded-none shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center';
+                subRightPointBtn.innerHTML = '<i class="fa fa-minus"></i>';
             }
         }
 
@@ -364,8 +375,6 @@
         addRightPointBtn.addEventListener('click', addRightTeamPoint);
         subLeftPointBtn.addEventListener('click', subLeftTeamPoint);
         subRightPointBtn.addEventListener('click', subRightTeamPoint);
-        swapTeamsBtn.addEventListener('click', swapTeams);
-        swapTeamsRightBtn.addEventListener('click', swapTeams);
         recordScoreBtn.addEventListener('click', recordCurrentScore);
 
         // 重置比分时也清空记录
@@ -391,6 +400,28 @@
                 notification.classList.add('opacity-0');
             }, 3000);
         }
+
+        // 移除手动切换相关的变量和函数
+        let isLandscape = false;
+        const scoreContainer = document.getElementById('scoreContainer');
+
+        // 添加窗口大小变化监听
+        function handleResize() {
+            const shouldBeLandscape = window.innerWidth > window.innerHeight;
+            if (shouldBeLandscape !== scoreContainer.classList.contains('landscape-mode')) {
+                if (shouldBeLandscape) {
+                    scoreContainer.classList.add('landscape-mode');
+                } else {
+                    scoreContainer.classList.remove('landscape-mode');
+                }
+            }
+        }
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', handleResize);
+
+        // 初始化时检查一次
+        handleResize();
 
         // 初始化
         updateScoreDisplay();
